@@ -2,10 +2,7 @@
 #include <string>
 using namespace std;
 
-// ============================================================
-// CIRCULAR LINKED LIST - TRAFFIC SIGNAL MANAGEMENT
-// ============================================================
-
+// Circular Linked List for Traffic Signals
 struct Signal {
     int id;
     string name;
@@ -23,13 +20,8 @@ public:
         last = nullptr;
     }
 
-    // Add a traffic signal
     void addSignal(int id, string name, string direction) {
-        Signal* newSignal = new Signal;
-        newSignal->id = id;
-        newSignal->name = name;
-        newSignal->direction = direction;
-        newSignal->status = "RED";
+        Signal* newSignal = new Signal{id, name, direction, "RED", nullptr};
 
         if (last == nullptr) {
             last = newSignal;
@@ -43,7 +35,6 @@ public:
         cout << "Traffic signal added successfully.\n";
     }
 
-    // Delete a traffic signal
     void deleteSignal(int id) {
         if (last == nullptr) {
             cout << "No traffic signals available.\n";
@@ -79,7 +70,6 @@ public:
         cout << "Signal not found.\n";
     }
 
-    // Display all signals
     void displaySignals() {
         if (last == nullptr) {
             cout << "No traffic signals available.\n";
@@ -101,7 +91,24 @@ public:
         } while (current != last->next);
     }
 
-    // Set one signal to GREEN and others to RED
+    void nextSignal() {
+        if (last == nullptr) {
+            cout << "No signals available.\n";
+            return;
+        }
+
+        Signal* current = last->next;
+
+        current->status = "RED";
+        current = current->next;
+        current->status = "GREEN";
+
+        last->next = current;
+
+        cout << "Moved to next traffic signal.\n";
+        cout << "Current Signal: " << current->name << endl;
+    }
+
     void setEmergencySignal(int id) {
         if (last == nullptr) {
             cout << "No traffic signals available.\n";
@@ -129,7 +136,6 @@ public:
             cout << "Signal not found.\n";
     }
 
-    // Resume normal operation
     void resetSignals() {
         if (last == nullptr)
             return;
@@ -141,38 +147,14 @@ public:
             current = current->next;
         } while (current != last->next);
 
-        // First signal becomes GREEN
         last->next->status = "GREEN";
 
         cout << "Normal traffic signal cycle resumed.\n";
     }
-
-    // Move signal cycle
-    void nextSignal() {
-        if (last == nullptr) {
-            cout << "No signals available.\n";
-            return;
-        }
-
-        // Current first signal becomes RED
-        last->next->status = "RED";
-
-        // Move first node to next node
-        last->next = last->next->next;
-
-        last->next->status = "GREEN";
-
-        cout << "Moved to next traffic signal.\n";
-        cout << "Current Signal: "
-             << last->next->name << endl;
-    }
 };
 
 
-// ============================================================
-// DOUBLY LINKED LIST - ROAD / JUNCTION MANAGEMENT
-// ============================================================
-
+// Doubly Linked List for Road Network
 struct Junction {
     int id;
     string name;
@@ -191,14 +173,8 @@ public:
         tail = nullptr;
     }
 
-    // Add a junction
     void addJunction(int id, string name) {
-        Junction* newJunction = new Junction;
-
-        newJunction->id = id;
-        newJunction->name = name;
-        newJunction->prev = nullptr;
-        newJunction->next = nullptr;
+        Junction* newJunction = new Junction{id, name, nullptr, nullptr};
 
         if (head == nullptr) {
             head = tail = newJunction;
@@ -211,13 +187,7 @@ public:
         cout << "Junction added successfully.\n";
     }
 
-    // Delete a junction
     void deleteJunction(int id) {
-        if (head == nullptr) {
-            cout << "No junctions available.\n";
-            return;
-        }
-
         Junction* current = head;
 
         while (current != nullptr) {
@@ -245,7 +215,6 @@ public:
         cout << "Junction not found.\n";
     }
 
-    // Forward traversal
     void displayForward() {
         if (head == nullptr) {
             cout << "No junctions available.\n";
@@ -257,8 +226,7 @@ public:
         cout << "\nRoad Network - Forward Direction:\n";
 
         while (current != nullptr) {
-            cout << "[" << current->id << "] "
-                 << current->name;
+            cout << "[" << current->id << "] " << current->name;
 
             if (current->next != nullptr)
                 cout << " <-> ";
@@ -269,7 +237,6 @@ public:
         cout << endl;
     }
 
-    // Backward traversal
     void displayBackward() {
         if (tail == nullptr) {
             cout << "No junctions available.\n";
@@ -281,8 +248,7 @@ public:
         cout << "\nRoad Network - Backward Direction:\n";
 
         while (current != nullptr) {
-            cout << "[" << current->id << "] "
-                 << current->name;
+            cout << "[" << current->id << "] " << current->name;
 
             if (current->prev != nullptr)
                 cout << " <-> ";
@@ -293,14 +259,12 @@ public:
         cout << endl;
     }
 
-    // Search junction
     void searchJunction(int id) {
         Junction* current = head;
 
         while (current != nullptr) {
             if (current->id == id) {
-                cout << "Junction Found: "
-                     << current->name << endl;
+                cout << "Junction Found: " << current->name << endl;
                 return;
             }
 
@@ -311,10 +275,6 @@ public:
     }
 };
 
-
-// ============================================================
-// MAIN PROGRAM
-// ============================================================
 
 int main() {
 
@@ -335,12 +295,11 @@ int main() {
     roads.addJunction(3, "Hospital Junction");
     roads.addJunction(4, "Market Junction");
 
-    // First signal is GREEN
     signals.resetSignals();
 
     do {
         cout << "\n============================================\n";
-        cout << " SMART TRAFFIC MANAGEMENT SYSTEM\n";
+        cout << "     SMART TRAFFIC MANAGEMENT SYSTEM\n";
         cout << "============================================\n";
         cout << "1. Display Traffic Signals\n";
         cout << "2. Move to Next Signal\n";
@@ -374,7 +333,6 @@ int main() {
 
             cout << "Enter signal ID: ";
             cin >> id;
-
             cin.ignore();
 
             cout << "Enter signal name: ";
@@ -406,7 +364,6 @@ int main() {
 
             signals.setEmergencySignal(id);
             signals.displaySignals();
-
             break;
         }
 
@@ -429,7 +386,6 @@ int main() {
 
             cout << "Enter junction ID: ";
             cin >> id;
-
             cin.ignore();
 
             cout << "Enter junction name: ";
