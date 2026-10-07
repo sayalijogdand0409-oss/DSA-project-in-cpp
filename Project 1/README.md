@@ -74,31 +74,32 @@ The system can divide traffic into different density levels:
 
 This allows the traffic signal to respond according to actual traffic conditions instead of using fixed timings.
 
-##  System Flow
+## System Flow
 
-```text
-START
-  ↓
-Initialize Sensors & Traffic Signals
-  ↓
-Detect Traffic Density
-  ↓
-Check Emergency Vehicle
-  ↓
-Emergency Vehicle Detected?
-  ├── YES → Give Green Signal to Emergency Lane
-  │          ↓
-  │       Clear Other Lanes
-  │          ↓
-  │       Emergency Vehicle Passes
-  │          ↓
-  │       Return to Normal Mode
-  │
-  └── NO → Calculate Traffic Density
-             ↓
-          Adjust Signal Timing
-             ↓
-          Continue Monitoring
+**START**  
+↓  
+**Initialize Sensors & Traffic Signals**  
+↓  
+**Detect Traffic Density**  
+↓  
+**Check Emergency Vehicle**  
+↓  
+**Emergency Vehicle Detected?**
+
+**YES** → Give Green Signal to Emergency Lane  
+↓  
+Clear Other Lanes  
+↓  
+Emergency Vehicle Passes  
+↓  
+Return to Normal Mode  
+
+**NO** → Calculate Traffic Density  
+↓  
+Adjust Signal Timing  
+↓  
+Continue Monitoring  
+
 ## Software & Technologies
 
 - Arduino IDE
