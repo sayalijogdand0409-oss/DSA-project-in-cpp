@@ -1,4 +1,4 @@
-## 🔄 Flowchart
+## Flowchart
 
 The following flowchart illustrates the non-recursive preorder traversal of a binary tree using a stack.
 
