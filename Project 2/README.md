@@ -231,11 +231,7 @@ After completing this project, you will be able to:
 
 ## Author
 
-**Name:** Your Name
-
-**GitHub:** [Your GitHub Profile](https://github.com/YOUR-USERNAME)
-
-Replace `Your Name` and `YOUR-USERNAME` with your own details.
+**Name:** Sayali Jodand
 
 ## License
 
